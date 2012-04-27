@@ -1,0 +1,86 @@
+<!doctype html>
+
+<meta charset="utf-8" />
+<title>ZergRush Demo</title>
+
+<style>
+body { font-size: .8em;  font-family: sans-serif; }
+h1 {
+  font-size: 1.2em;
+  font-weight: normal;
+}
+#controls {
+  padding: 20px;
+  border-bottom: 2px solid black;
+}
+div.target {
+  margin: 20px;
+  width: 100px;
+  height: 100px;
+  background: yellow;
+  border: 1px solid red;
+  float: left;
+}
+</style>
+
+<body>
+
+  <div id="controls" class="antiZerg">
+    <h1>ZergRush | by <a href="http://james.padolsey.com">James Padolsey</a> | <a href="">Blog post</a> | <a href="">Github</a></h1>
+    <button id="go">Go</button> |
+    <button id="reset">Reset</button> |
+    <a href="javascript:void function(){function j(){function c(a,b,c){this.rush=c;this.speed=3;this.x=a;this.y=b;this.height=this.width=10;this.isFinished=this.isKilling=!1;this.dPulsate=0;this.dom=e(&quot;&lt;zergling&gt;&quot;).css({width:this.width,height:this.height,position:&quot;absolute&quot;,display:&quot;block&quot;,background:&quot;red&quot;,left:a,top:b,borderRadius:&quot;5px&quot;,zIndex:9999}).appendTo(k)}function f(a){var b=this,d=this.zerglings=[];this.targets=[];for(var e=0;e&lt;a;++e)d.push(new c(100*Math.random(),100*Math.random(),this));this.intervalID=setInterval(function(){b.step()},
+30)}window.Zergling=c;window.ZergRush=f;var h=document,k=h.body,g=Math.atan2,m=Math.cos,n=Math.sin,o=Math.PI,i=Math.random,p=Math.max;c.DATA_KEY=&quot;zergTargetData&quot;;c.MIN_TARGET_AREA=5E4;c.VISION=1E3;c.LIFE=50;c.isSuitableTarget=function(a){var b;if(!a)return!1;for(b=a;b=b.parentNode;)if(e.data(b,c.DATA_KEY)||/antiZerg/i.test(b.className))return!1;b=e.data(a,c.DATA_KEY);a=e(a);return!/zergling/i.test(a[0].nodeName)&amp;&amp;!/antiZerg/i.test(a[0].className)&amp;&amp;(!b||0&lt;b.life)&amp;&amp;a.width()*a.height()&lt;c.MIN_TARGET_AREA};
+c.prototype={calcMovement:function(){var a=this.target,b=a.position.left+i()*a.width-this.x,a=a.position.top+i()*a.height-this.y,b=g(a,b);this.dx=this.speed*m(b);this.dy=this.speed*n(b)},draw:function(){if(!this.isFinished){var a=this.target;if(this.isKilling)0&lt;a.life?(a.life--,this.pulsate(),a.dom.css(&quot;opacity&quot;,a.life/c.LIFE)):(a.dom.css(&quot;visibility&quot;,&quot;hidden&quot;),this.pulsate(0),this.isKilling=!1,this.target=null);else{if(!this.target||0&gt;=this.target.life)if(this.findTarget())a=this.target,this.calcMovement();
+else{this.isFinished=!0;this.dom.fadeOut(100,function(){e(this).remove()});return}this.hasReachedTarget()?this.isKilling=!0:(this.x+=this.dx,this.y+=this.dy,this.dom.css({left:this.x,top:this.y}))}}},hasReachedTarget:function(){var a=this.target,b=a.position;return this.x&gt;=b.left&amp;&amp;this.y&gt;=b.top&amp;&amp;this.x&lt;=b.left+a.width&amp;&amp;this.y&lt;=b.top+a.height},findTarget:function(){var a,b,d,f,g=this.width/2,i=this.height/2,j=p(k.scrollTop,h.documentElement.scrollTop),l=p(k.scrollLeft,h.documentElement.scrollLeft);
+for(a=10;a&lt;c.VISION;a+=50)for(b=0;360&gt;b;b+=45)if(d=this.x+g+a*m(o/180*b)-l,f=this.y+i+a*n(o/180*b)-j,c.isSuitableTarget(d=h.elementFromPoint(d,f)))return d=e(d),a=this.target=d.data(c.DATA_KEY),a||(d.data(c.DATA_KEY,this.target={dom:d,position:d.offset(),width:d.width(),height:d.height(),life:c.LIFE,initialCSS:{visibility:&quot;&quot;,opacity:d.css(&quot;opacity&quot;)||&quot;&quot;}}),this.rush.registerTarget(this.target)),!0},pulsate:function(){(this.dPulsate=!this.dPulsate)?this.dom.css({left:this.x-2,top:this.y-2,width:14,
+height:14}):this.dom.css({left:this.x,top:this.y,width:10,height:10})}};f.prototype={step:function(){for(var a=!0,b=0;b&lt;this.zerglings.length;++b)this.zerglings[b].draw(),a=a&amp;&amp;this.zerglings[b].isFinished;a&amp;&amp;clearInterval(this.intervalID)},destroy:function(){clearInterval(this.intervalID);for(var a=0;a&lt;this.zerglings.length;++a)this.zerglings[a].dom.remove();for(a=0;a&lt;this.targets.length;++a)this.targets[a].dom.css(this.targets[a].initialCSS),this.targets[a].dom.removeData(c.DATA_KEY)},registerTarget:function(a){this.targets.push(a)}}}
+var e,f=window.jQuery,g=document.createElement(&quot;script&quot;);g.src=&quot;https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js&quot;;document.body.appendChild(g);var l=setInterval(function(){if(f?window.jQuery!==f:window.jQuery)clearInterval(l),e=window.jQuery.noConflict(!0),j(),new ZergRush(20)},200)}();">Zerg Rush!</a> (Bookmarklet [drag to toolbar])
+  </div>
+ 
+  <div class="target"></div> 
+  <div class="target"></div> 
+  <div class="target"></div> 
+  <div class="target"></div> 
+  <div class="target"></div> 
+  <div class="target"></div> 
+  <div class="target"></div> 
+  <div class="target"></div> 
+  <div class="target"></div> 
+  <div class="target"></div> 
+  <div class="target"></div> 
+  <div class="target"></div> 
+  <div class="target"></div> 
+  <div class="target"></div> 
+  <div class="target"></div> 
+  <div class="target"></div> 
+  <div class="target"></div> 
+  <div class="target"></div> 
+  <div class="target"></div>
+  <div class="target"></div> 
+  <div class="target"></div> 
+  <div class="target"></div> 
+  <div class="target"></div> 
+  <div class="target"></div> 
+  <div class="target"></div> 
+  <div class="target"></div>  
+
+  <script src="http://code.jquery.com/jquery-1.7.1.js"></script>
+  <script src="ZergRush.js"></script>
+
+  <script>
+
+    var z;
+
+    document.getElementById('go').onclick = function() {
+      if (!z) {
+        z = new ZergRush(20);
+      }
+    };
+    document.getElementById('reset').onclick = function() {
+      z.destroy();
+      z = null;
+    };
+  </script>
+
+</body>
