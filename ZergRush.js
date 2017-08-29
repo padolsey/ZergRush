@@ -8,7 +8,6 @@
       atan2 = Math.atan2,
       cos = Math.cos,
       sin = Math.sin,
-      sqrt = Math.sqrt,
       PI = Math.PI,
       random = Math.random,
       max = Math.max;
@@ -56,7 +55,7 @@
     }
 
     // Make sure none of its ancestors are currently targets:
-    for (var parent = candidate; parent = parent.parentNode;) {
+    for (var parent = candidate; (parent = parent.parentNode);) {
       if ($.data(parent, Zergling.DATA_KEY) || /antiZerg/i.test(parent.className)) {
         return false;
       }
@@ -152,7 +151,7 @@
       return  this.x >= pos.left &&
               this.y >= pos.top &&
               this.x <= pos.left + target.width &&
-              this.y <= pos.top + target.height
+              this.y <= pos.top + target.height;
     },
 
     findTarget: function() {
@@ -205,7 +204,7 @@
     },
 
     pulsate: function() {
-      if (this.dPulsate = !this.dPulsate) {
+      if ((this.dPulsate = !this.dPulsate)) {
         this.dom.css({
           left: this.x - 2,
           top: this.y - 2,
@@ -242,7 +241,7 @@
     }
 
     this.intervalID = setInterval(function() {
-      me.step()
+      me.step();
     }, 30);
 
   }
@@ -267,14 +266,14 @@
       for (var i = 0; i < this.zerglings.length; ++i) {
         this.zerglings[i].dom.remove();
       }
-      for (var i = 0; i < this.targets.length; ++i) {
-        this.targets[i].dom.css(this.targets[i].initialCSS);
-        this.targets[i].dom.removeData(Zergling.DATA_KEY);
+      for (var j = 0; j < this.targets.length; ++j) { 
+        this.targets[j].dom.css(this.targets[j].initialCSS); 
+        this.targets[j].dom.removeData(Zergling.DATA_KEY);
       }
     },
     registerTarget: function(target) {
       this.targets.push(target);
     }
-  }
+  };
 
 }());
